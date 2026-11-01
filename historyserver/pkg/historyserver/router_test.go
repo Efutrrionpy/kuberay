@@ -16,11 +16,6 @@ func TestRouterAPI(t *testing.T) {
 	})
 	routerAPI(&ServerHandler{})
 
-	clusterCookies := map[string]string{
-		COOKIE_CLUSTER_NAME_KEY:      "cluster-a",
-		COOKIE_CLUSTER_NAMESPACE_KEY: "default",
-		COOKIE_SESSION_NAME_KEY:      "live",
-	}
 	cases := []struct {
 		name       string
 		method     string
@@ -30,8 +25,8 @@ func TestRouterAPI(t *testing.T) {
 	}{
 		{"authentication_mode", http.MethodGet, "/api/authentication_mode", nil, http.StatusNotFound},
 		{"authenticate", http.MethodPost, "/api/authenticate", nil, http.StatusNotFound},
-		{"authentication_mode_with_cluster_cookies", http.MethodGet, "/api/authentication_mode", clusterCookies, http.StatusNotFound},
-		{"authenticate_with_cluster_cookies", http.MethodPost, "/api/authenticate", clusterCookies, http.StatusNotFound},
+		{"authentication_mode_with_cluster_cookies", http.MethodGet, "/api/authentication_mode", liveCookies(), http.StatusNotFound},
+		{"authenticate_with_cluster_cookies", http.MethodPost, "/api/authenticate", liveCookies(), http.StatusNotFound},
 		{"cluster_status_requires_cookies", http.MethodGet, "/api/cluster_status", nil, http.StatusBadRequest},
 		{"fallback_requires_cookies", http.MethodGet, "/api/custom_endpoint", nil, http.StatusBadRequest},
 	}

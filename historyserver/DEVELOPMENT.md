@@ -133,7 +133,7 @@ ray start --head --num-cpus=1 --proxy-server-url=http://localhost:8080
 > [!NOTE]
 > Use `--proxy-server-url` parameter to route requests to the port-forwarded History Server.
 
-If token authentication is enabled, open `http://localhost:8265/` and log in with
+If token authentication is enabled (enabled by default in Ray 2.59+), open `http://localhost:8265/` and log in with
 the token from `ray get-auth-token` before continuing.
 
 ## Step 7: Validate the Dead Path
